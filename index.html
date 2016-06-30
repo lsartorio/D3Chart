@@ -7,5 +7,25 @@
 	<p></p>
 
 	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script type="text/javascript">
+		
+		var dataArray = [30, 15, 45];
+
+		var canvas = d3.select("body")
+						.append("svg")
+						.attr("width", 500)
+						.attr("height", 500);
+
+		var bars = canvas.selectAll("rect")
+						.data(dataArray)
+						.enter()
+							.append("rect")
+							.attr("width", function(d){ return d * 10 })
+							.attr("height", 50)
+							.attr("y", function(d,i) { return i * 100 });
+
+		console.log(bars);
+	</script>
+	</script>
 </body>
 </html>
