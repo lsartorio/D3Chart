@@ -10,6 +10,22 @@
 	<script type="text/javascript">
 		d3.select("body").append("p").text("Hello!");
 
+		var dataArray = [30, 15, 45];
+
+		var canvas = d3.select("body")
+						.append("svg")
+						.attr("width", 500)
+						.attr("height", 500);
+
+		var bars = canvas.selectAll("rect")
+						.data(dataArray)
+						.enter()
+							.append("rect")
+							.attr("width", function(d){ return d * 10 })
+							.attr("height", 50)
+							.attr("y", function(d,i) { return i * 100 });
+
+		console.log(bars);
 	</script>
 </body>
 </html>
