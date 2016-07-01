@@ -2,30 +2,53 @@
 <html>
 <head>
 	<title>D3</title>
+	<style type="text/css">
+		svg {
+			background: #dcdcdc;
+		}
+	</style>
 </head>
 <body>
 	<p></p>
 
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script type="text/javascript">
-		
-		var dataArray = [30, 15, 45];
+		d3.select("body").append("p").text("Hello!");
+
+		var dataArray = [30, 15, 100, 45, 65, 10, 25, 65];
+
+		var width = 500;
+		var height = 500;
 
 		var canvas = d3.select("body")
 						.append("svg")
-						.attr("width", 500)
-						.attr("height", 500);
+						.attr("width", width)
+						.attr("height", height);
+
+		var widthScale = d3.scaleLinear()
+						.domain([0, 100])
+						.range([0, width]);
+
+		var colorScale = d3.scaleLinear()
+						.domain([0, 100])
+						.range(["red", "cyan"]);
 
 		var bars = canvas.selectAll("rect")
 						.data(dataArray)
 						.enter()
 							.append("rect")
-							.attr("width", function(d){ return d * 10 })
-							.attr("height", 50)
-							.attr("y", function(d,i) { return i * 100 });
+							.attr("width", 0)
+							.attr("height", 25)
+							.attr("fill", "#bbb")
+							.attr("y", function(d,i) { return i * 40 });
+
+		bars.transition()
+			.duration(1500)
+			.attr("width", function(d){ return widthScale(d); })
+			.attr("fill", function(d) { return colorScale(d); });
 
 		console.log(bars);
 	</script>
-	</script>
+
 </body>
 </html>
